@@ -189,6 +189,7 @@ def test_capture_bayer(camera, mode):
     camera.capture(stream, format='jpeg', bayer=True)
     # Bayer data is always the last 6404096 bytes of the stream, and starts
     # with 'BRCM'
+    # TODO [imx477] - Verify/update
     if camera.exif_tags['IFD0.Model'].upper() == 'RP_OV5647':
         stream.seek(-6404096, io.SEEK_END)
     else:
@@ -199,6 +200,7 @@ def test_capture_sequence_bayer(camera, mode):
     streams = [io.BytesIO() for i in range(3)]
     camera.capture_sequence(streams, format='jpeg', bayer=True)
     for stream in streams:
+        # TODO [imx477] - Verify/update
         if camera.exif_tags['IFD0.Model'].upper() == 'RP_OV5647':
             stream.seek(-6404096, io.SEEK_END)
         else:

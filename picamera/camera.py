@@ -208,7 +208,8 @@ class PiCamera(object):
     MAX_RESOLUTION = PiCameraMaxResolution # modified by PiCamera.__init__
     MAX_FRAMERATE = PiCameraMaxFramerate # modified by PiCamera.__init__
     DEFAULT_ANNOTATE_SIZE = 32
-    CAPTURE_TIMEOUT = 60
+    # TODO [imx477] - Verify/update
+    CAPTURE_TIMEOUT = 230
 
     SENSOR_MODES = {
         'ov5647': {
@@ -229,17 +230,16 @@ class PiCamera(object):
             6: mo.PiSensorMode('720p', (40, 90), full_fov=False),
             7: mo.PiSensorMode('VGA', (40, 90), full_fov=False),
             },
-        # XXX guessing testc isn't the final sensor name, and these modes are
-        # probably a bit wrong (definitely the framerates which are entirely
-        # guesses!). May want to extend PiSensorMode to have a bpp field given
-        # the XGA modes beneath are definitely 10-bit and the rest are 12-bit
-        # raw? Doesn't matter for picamera operations, but useful to API users
-        'testc': {
-            1: mo.PiSensorMode('2028x1088', (1, 30), full_fov=False),
-            2: mo.PiSensorMode('2028x1520', (1, 15), still=True),
-            3: mo.PiSensorMode('4056x3040', (1/10, 1), still=True),
-            4: mo.PiSensorMode('1012x760', (1, 40)),
-            },
+        # TODO [imx477] - Verify/update
+        'imx477': {
+            1: mo.PiSensorMode('1080p', (1/10, 30), full_fov=False),
+            2: mo.PiSensorMode('4056x3040', (1/200, 10), still=True),
+            3: mo.PiSensorMode('4056x3040', (1/200, 10), still=True),
+            4: mo.PiSensorMode('3280x2464', (1/10, 15), still=True),
+            5: mo.PiSensorMode('1640x1232', (1/10, 40)),
+            6: mo.PiSensorMode('720p', (40, 90), full_fov=False),
+            7: mo.PiSensorMode('VGA', (40, 90), full_fov=False),
+            }
         }
 
     METER_MODES = {
@@ -502,7 +502,7 @@ class PiCamera(object):
             if revision.lower() == 'ov5647':
                 PiCamera.MAX_FRAMERATE = 90
             else:
-                # XXX is this correct for sensor testc?
+                # TODO [imx477] - Verify/update
                 PiCamera.MAX_FRAMERATE = 120
         self._revision = revision
 

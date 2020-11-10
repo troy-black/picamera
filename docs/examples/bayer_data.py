@@ -18,6 +18,7 @@ with picamera.PiCamera() as camera:
     time.sleep(2)
     # Capture the image, including the Bayer data
     camera.capture(stream, format='jpeg', bayer=True)
+    # TODO [imx477] - Verify/update
     ver = {
         'RP_ov5647': 1,
         'RP_imx219': 2,
