@@ -428,6 +428,7 @@ class PiBayerArray(PiArrayOutput):
     def flush(self):
         super(PiBayerArray, self).flush()
         self._demo = None
+        # TODO [imx477] - Verify/update
         offset = {
             'OV5647': {
                 0: 6404096,

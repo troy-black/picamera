@@ -137,6 +137,7 @@ def test_bayer_array(camera, mode):
     with picamera.array.PiBayerArray(camera) as stream:
         camera.capture(stream, 'jpeg', bayer=True)
         # Bayer data is always full res
+        # TODO [imx477] - Verify/update
         if camera.exif_tags['IFD0.Model'].upper() == 'RP_OV5647':
             assert stream.array.shape == (1944, 2592, 3)
             assert stream.demosaic().shape == (1944, 2592, 3)
